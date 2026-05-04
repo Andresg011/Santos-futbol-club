@@ -1,0 +1,262 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ================= BASE (MÓVIL PRIMERO) ================= */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #111;
+    line-height: 1.5;
+}
+
+/* ================= HEADER ================= */
+header {
+    position: relative;
+    height: 250px;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    animation: sliderFondo 18s infinite;
+    z-index: 0;
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+}
+
+header * {
+    position: relative;
+    z-index: 2;
+}
+
+header img {
+    width: 120px;
+    max-width: 100%;
+}
+
+header h1 {
+    font-size: 22px;
+}
+
+header p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* ================= NAV ================= */
+nav {
+    background-color: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 6px 0;
+    font-weight: bold;
+}
+
+/* ================= SECCIONES ================= */
+section {
+    padding: 15px;
+}
+
+section h2 {
+    margin-bottom: 10px;
+    border-left: 5px solid #000;
+    padding-left: 10px;
+}
+
+/* ================= CARDS ================= */
+.card {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* ================= FORM ================= */
+form input,
+form select {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+form button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* ================= GALERÍA ================= */
+.galeria {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+}
+
+.galeria img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+/* ================= REDES ================= */
+.redes {
+    text-align: center;
+}
+
+.redes-contenedor p {
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+/* ================= WHATSAPP ================= */
+.whatsapp {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+/* ================= ANIMACIÓN ================= */
+@keyframes sliderFondo {
+    0% { background-image: url("../img/img1.png"); }
+    33% { background-image: url("../img/img2.png"); }
+    66% { background-image: url("../img/img3.png"); }
+    100% { background-image: url("../img/img1.png"); }
+}
+
+/* ================= TABLET ================= */
+@media (min-width: 768px) {
+
+    header {
+        height: 300px;
+    }
+
+    header img {
+        width: 150px;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    header p {
+        font-size: 16px;
+    }
+
+    nav {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        margin: 8px 12px;
+    }
+
+    section {
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .galeria img {
+        width: 220px;
+        height: 140px;
+    }
+}
+
+/* ================= PC ================= */
+@media (min-width: 1024px) {
+
+    header {
+        height: 320px;
+    }
+
+    header img {
+        width: 180px;
+    }
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    section {
+        max-width: 1200px;
+    }
+
+    .galeria img {
+        width: 260px;
+        height: 160px;
+    }
+}
+
+/* ================= PANTALLAS GRANDES ================= */
+@media (min-width: 1400px) {
+
+    section {
+        max-width: 1300px;
+    }
+
+    .galeria img {
+        width: 300px;
+        height: 180px;
+    }
+}

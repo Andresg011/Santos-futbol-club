@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Jugadores - Escuela de Fútbol Santos</title>
+
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+    <img src="santos-logo/santos-logo.svg" alt="Escudo de la escuela">
+    <h1>Escuela de Fútbol Santos</h1>
+    <p>Formando talento y disciplina </p>
+</header>
+
+<!-- ================= MENÚ ================= -->
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="jugadores.html">Jugadores</a>
+    <a href="inscripcion.html">Inscripción</a>
+    <a href="pagos.html">Pagos</a>
+    <a href="contacto.html">Contacto</a>
+</nav>
+
+<!-- ================= SECCIÓN JUGADORES ================= -->
+<section>
+    <h2>Nuestros Jugadores</h2>
+
+    <div class="card">
+        <p>
+            Conoce a los talentos que forman parte de nuestra escuela,
+            organizados por categorías.
+        </p>
+    </div>
+
+    <!-- FILTRO -->
+    <div class="filtro">
+        <label for="categoria">Filtrar por categoría:</label>
+
+        <select id="categoria" onchange="filtrarJugadores()">
+            <option value="todos">Todos</option>
+            <option value="sub6">Sub 6</option>
+            <option value="sub8">Sub 8</option>
+            <option value="sub12">Sub 12</option>
+            <option value="sub15">Sub 15</option>
+        </select>
+    </div>
+
+    <!-- GRID DE JUGADORES -->
+    <div class="jugadores-grid">
+
+        <!-- SUB 6 -->
+        <div class="jugador sub6">
+            <img src="img/jugador1.jpg" alt="">
+            <h3>Juan Pérez</h3>
+            <p>Edad: 6</p>
+            <p>Categoría: Sub 6</p>
+        </div>
+
+        <!-- SUB 8 -->
+        <div class="jugador sub8">
+            <img src="img/jugador2.jpg" alt="">
+            <h3>Carlos Gómez</h3>
+            <p>Edad: 8</p>
+            <p>Categoría: Sub 8</p>
+        </div>
+
+        <!-- SUB 12 -->
+        <div class="jugador sub12">
+            <img src="img/jugador3.jpg" alt="">
+            <h3>David Rodríguez</h3>
+            <p>Edad: 12</p>
+            <p>Categoría: Sub 12</p>
+        </div>
+
+        <!-- SUB 15 -->
+        <div class="jugador sub15">
+            <img src="img/jugador1.jpg" alt="">
+            <h3>Andrés López</h3>
+            <p>Edad: 15</p>
+            <p>Categoría: Sub 15</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <p>© 2026 Escuela de Fútbol Santos - Todos los derechos reservados</p>
+</footer>
+
+<!-- ================= SCRIPT FILTRO ================= -->
+<script>
+function filtrarJugadores() {
+    let categoria = document.getElementById("categoria").value;
+    let jugadores = document.querySelectorAll(".jugador");
+
+    jugadores.forEach(jugador => {
+
+        if (categoria === "todos") {
+            jugador.style.display = "block";
+        } else {
+            if (jugador.classList.contains(categoria)) {
+                jugador.style.display = "block";
+            } else {
+                jugador.style.display = "none";
+            }
+        }
+
+    });
+}
+</script>
+
+</body>
+</html>
