@@ -1,134 +1,262 @@
 /* ================= RESET ================= */
+/* Elimina márgenes y padding por defecto del navegador */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ================= BASE (MÓVIL PRIMERO) ================= */
+/* ================= BASE ================= */
+/* Estilos generales del cuerpo de la página */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    color: #111;
-    line-height: 1.5;
+    font-family: Arial, sans-serif; /* Fuente principal */
+    background-color: #ffffff; /* Fondo blanco */
+    color: #111; /* Color de texto principal */
+    line-height: 1.5; /* Espaciado entre líneas */
 }
 
 /* ================= HEADER ================= */
+/* Contenedor principal del encabezado */
 header {
-    position: relative;
-    height: 250px;
-    color: #ffffff;
-    text-align: center;
-    padding: 20px;
+    position: relative; /* Permite posicionar elementos internos */
+    height: 250px; /* Altura del header */
+    color: #ffffff; /* Color del texto */
+    text-align: center; /* Centra el contenido */
+    padding: 20px; /* Espaciado interno */
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* Activa flexbox */
+    flex-direction: column; /* Organiza elementos en columna */
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
 
-    overflow: hidden;
+    overflow: hidden; /* Oculta desbordes */
 }
 
+/* Fondo animado del header */
 header::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+    content: ""; /* Elemento decorativo */
+    position: absolute; /* Se posiciona dentro del header */
+    inset: 0; /* Ocupa todo el header */
 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover; /* Cubre todo el espacio */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita repetición */
 
-    animation: sliderFondo 18s infinite;
-    z-index: 0;
+    animation: sliderFondo 18s infinite; /* Animación de imágenes */
+    z-index: 0; /* Queda detrás del contenido */
 }
 
+/* Capa oscura encima del fondo */
 header::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.55); /* Oscurece el fondo */
     z-index: 1;
 }
 
+/* Todo el contenido del header queda encima del fondo */
 header * {
     position: relative;
     z-index: 2;
 }
 
+/* Imagen del logo */
 header img {
-    width: 120px;
-    max-width: 100%;
+    width: 120px; /* Tamaño base del logo */
+    max-width: 100%; /* Evita desbordes */
 }
 
+/* Título principal */
 header h1 {
     font-size: 22px;
 }
 
+/* Subtítulo */
 header p {
     font-size: 14px;
     color: #ccc;
 }
 
 /* ================= NAV ================= */
+/* Barra de navegación */
 nav {
-    background-color: #111;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-color: #111; /* Fondo oscuro */
+    display: flex; /* Flexbox */
+    flex-direction: column; /* En móvil en columna */
+    align-items: center; /* Centrado */
     padding: 10px;
 }
 
+/* ================= NAV LINKS ESTILO BOTÓN PRO ================= */
 nav a {
+
     color: #fff;
     text-decoration: none;
+
     margin: 6px 0;
+    padding: 8px 14px;
+
     font-weight: bold;
+
+    border-radius: 6px;
+    border: 2px solid transparent;
+
+    position: relative;
+    display: inline-block;
+
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, border 0.3s ease;
+
+    overflow: hidden;
+}
+
+/* HOVER TIPO BOTÓN */
+nav a:hover {
+
+    background-color: #fff;
+    color: #000;
+
+    border: 2px solid #000;
+
+    transform: scale(1.05);
+}
+
+/* EFECTO BRILLO */
+nav a::before {
+
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+
+    transition: 0.5s;
+}
+
+nav a:hover::before {
+    left: 100%;
 }
 
 /* ================= SECCIONES ================= */
+/* Espaciado general de secciones */
 section {
     padding: 15px;
 }
 
+/* Títulos de sección */
 section h2 {
     margin-bottom: 10px;
-    border-left: 5px solid #000;
+    border-left: 5px solid #000; /* Barra decorativa */
     padding-left: 10px;
 }
 
 /* ================= CARDS ================= */
+/* Contenedor tipo tarjeta */
 .card {
-    background: #f9f9f9;
-    padding: 15px;
-    margin-top: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: 0.2s;
+    background: #f9f9f9; /* Fondo claro */
+    padding: 15px; /* Espaciado interno */
+    margin-top: 10px; /* Separación superior */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* Sombra suave */
+
+    transition: transform 0.2s ease; /* Animación suave */
 }
 
+/* Efecto al pasar el mouse */
 .card:hover {
     transform: translateY(-3px);
 }
 
-/* ================= FORM ================= */
+/* ================= FORMULARIOS ================= */
+/* Inputs y selects */
 form input,
 form select {
-    width: 100%;
+    width: 100%; /* Ocupan todo el ancho */
     padding: 8px;
     margin: 8px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
 
+/* Botón del formulario */
 form button {
     background-color: #000;
     color: #fff;
     border: none;
     padding: 10px;
     border-radius: 5px;
+    cursor: pointer;
+
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ================= BOTÓN TIENDA ================= */
+/* Botón especial de la tienda */
+.btn-tienda {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #000;
+
+    padding: 10px 18px;
+    border-radius: 6px;
+
+    font-weight: bold;
+    cursor: pointer;
+
+    position: relative;
+    overflow: hidden;
+
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efecto de brillo */
+.btn-tienda::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+
+    transition: 0.5s;
+}
+
+/* Hover del botón */
+.btn-tienda:hover {
+    background-color: #fff;
+    color: #000;
+    transform: scale(1.05);
+}
+
+/* Activación del brillo */
+.btn-tienda:hover::before {
+    left: 100%;
+}
+
+/* Click del botón */
+.btn-tienda:active {
+    transform: scale(0.97);
 }
 
 /* ================= GALERÍA ================= */
+/* Contenedor horizontal */
 .galeria {
     display: flex;
     overflow-x: auto;
@@ -136,6 +264,7 @@ form button {
     padding: 10px;
 }
 
+/* Imágenes de galería */
 .galeria img {
     width: 180px;
     height: 120px;
@@ -175,7 +304,7 @@ footer {
     margin-top: 20px;
 }
 
-/* ================= ANIMACIÓN ================= */
+/* ================= ANIMACIÓN HEADER ================= */
 @keyframes sliderFondo {
     0% { background-image: url("../img/img1.png"); }
     33% { background-image: url("../img/img2.png"); }

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"> <!-- Permite usar caracteres especiales como tildes -->
+
+    <!-- Hace que la página sea responsive en celulares -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Descripción para SEO (Google) -->
+    <meta name="description" content="Tienda oficial Escuela de Fútbol Santos">
+
+    <!-- Título que aparece en la pestaña del navegador -->
+    <title>Tienda - Escuela Santos</title>
+
+    <!-- Mejora la velocidad conectando antes con el CDN -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Normaliza estilos entre navegadores -->
+    <link rel="stylesheet" href="styles/normalize.css">
+
+    <!-- Hoja de estilos principal del proyecto -->
+    <link rel="stylesheet" href="styles/style.css">
+
+    <!-- Librería de iconos (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+    <!-- Logo de la escuela -->
+    <img src="santos-logo/santos-logo.svg" alt="Escudo Escuela Santos" width="180" height="180">
+
+    <!-- Nombre principal -->
+    <h1>Escuela de Fútbol Santos</h1>
+
+    <!-- Eslogan -->
+    <p>Formando talento y disciplina</p>
+</header>
+
+<!-- ================= NAVEGACIÓN ================= -->
+<nav>
+    <!-- Enlaces a las diferentes páginas del sitio -->
+    <a href="index.html">Inicio</a>
+    <a href="jugadores.html">Jugadores</a>
+    <a href="inscripcion.html">Inscripción</a>
+    <a href="tienda.html">Tienda</a>
+    <a href="pagos.html">Pagos</a>
+    <a href="contacto.html">Contacto</a>
+</nav>
+
+<!-- ================= SECCIÓN TIENDA ================= -->
+<section>
+    <h2>Tienda Oficial</h2> <!-- Título de la sección -->
+
+    <p>Compra el uniforme completo de la Escuela Santos</p> <!-- Descripción -->
+
+    <!-- Contenedor tipo tarjeta para el formulario -->
+    <div class="card">
+
+        <!-- Campo para nombre del acudiente -->
+        <label>Nombre del acudiente:</label>
+        <input type="text" id="nombre"> <!-- Se usa id para capturar el valor con JS -->
+
+        <!-- Campo para nombre del jugador -->
+        <label>Nombre del jugador:</label>
+        <input type="text" id="jugador">
+
+        <!-- ================= TALLAS ================= -->
+
+        <!-- Selección de camiseta -->
+        <label>Talla camiseta:</label>
+        <select id="camiseta">
+            <!-- value es el precio -->
+            <option value="0">Seleccionar</option>
+            <option value="60000">S</option>
+            <option value="60000">M</option>
+            <option value="60000">L</option>
+        </select>
+
+        <!-- Selección de pantaloneta -->
+        <label>Talla pantaloneta:</label>
+        <select id="pantaloneta">
+            <option value="0">Seleccionar</option>
+            <option value="40000">S</option>
+            <option value="40000">M</option>
+            <option value="40000">L</option>
+        </select>
+
+        <!-- Selección de medias -->
+        <label>Talla medias:</label>
+        <select id="medias">
+            <option value="0">Seleccionar</option>
+            <option value="20000">S</option>
+            <option value="20000">M</option>
+            <option value="20000">L</option>
+        </select>
+
+        <!-- ================= BOTONES ================= -->
+
+        <!-- Botón que ejecuta la función calcularTotal() -->
+        <button onclick="calcularTotal()">Calcular Total</button>
+
+        <!-- Aquí se muestra el total -->
+        <p id="total"></p>
+
+        <!-- Botón que envía el pedido por WhatsApp -->
+        <button onclick="enviarWhatsApp()">Enviar pedido por WhatsApp</button>
+
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <!-- Texto legal -->
+    <p>© 2026 Escuela de Fútbol Santos - Todos los derechos reservados</p>
+</footer>
+
+<!-- Archivo JavaScript externo -->
+<script src="js/tienda.js"></script>
+
+</body>
+</html>
