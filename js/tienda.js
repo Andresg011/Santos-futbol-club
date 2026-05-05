@@ -1,7 +1,7 @@
 /* =========================================================
    CARRITO DE COMPRAS - ESCUELA SANTOS
    Archivo: tienda.js
-   Maneja productos, total y envío por WhatsApp
+   Maneja productos, imágenes, cantidades, total y WhatsApp
    ========================================================= */
 
 
@@ -9,10 +9,10 @@
    VARIABLES GLOBALES
    ========================= */
 
-// Arreglo que almacena los productos del carrito
+// Arreglo donde se almacenan los productos del carrito
 let carrito = [];
 
-// Total acumulado de la compra
+// Variable que almacena el total de la compra
 let total = 0;
 
 
@@ -20,18 +20,29 @@ let total = 0;
    AGREGAR PRODUCTO AL CARRITO
    ========================================================= */
 
-function agregarAlCarrito(nombre, precio) {
+function agregarAlCarrito(nombre, precio, imagen) {
 
-    // Se agrega el producto al carrito como objeto
+    // Solicita la cantidad del producto
+    let cantidad = parseInt(prompt("Ingresa la cantidad de este producto:"));
+
+    // Valida que la cantidad sea un número válido
+    if (!cantidad || cantidad <= 0) {
+        alert("Cantidad no válida");
+        return;
+    }
+
+    // Agrega el producto al carrito incluyendo la imagen
     carrito.push({
-        nombre: nombre,
-        precio: precio
+        nombreProducto: nombre,
+        precio: precio,
+        cantidad: cantidad,
+        imagen: imagen
     });
 
-    // Se suma el precio al total
-    total += precio;
+    // Calcula el total general
+    total += precio * cantidad;
 
-    // Se actualiza la interfaz
+    // Actualiza la interfaz del carrito
     actualizarCarrito();
 }
 
@@ -42,41 +53,62 @@ function agregarAlCarrito(nombre, precio) {
 
 function actualizarCarrito() {
 
-    // Elemento donde se listan los productos
+    // Obtiene la lista del carrito en el HTML
     const lista = document.getElementById("lista-carrito");
 
-    // Elemento donde se muestra el total
+    // Obtiene el elemento donde se muestra el total
     const totalHTML = document.getElementById("total");
 
-    // Se limpia la lista antes de volver a dibujar
+    // Limpia la lista antes de renderizar nuevamente
     lista.innerHTML = "";
 
     // Recorre los productos del carrito
     carrito.forEach((item, index) => {
 
-        // Se crea elemento <li>
+        // Crea el contenedor del producto
         const li = document.createElement("li");
 
-        // Texto del producto
-        li.textContent = `${item.nombre} - $${item.precio}`;
+        /* =========================
+           IMAGEN DEL PRODUCTO
+           ========================= */
 
-        // Botón eliminar
+        const img = document.createElement("img");
+        img.src = item.imagen;
+        img.width = 50;
+        img.height = 50;
+        img.style.marginRight = "10px";
+
+        /* =========================
+           TEXTO DEL PRODUCTO
+           ========================= */
+
+        const texto = document.createElement("span");
+        texto.textContent =
+            `${item.nombreProducto} x${item.cantidad} - $${item.precio * item.cantidad}`;
+
+        /* =========================
+           BOTÓN ELIMINAR
+           ========================= */
+
         const btnEliminar = document.createElement("button");
         btnEliminar.textContent = "X";
 
-        // Acción eliminar producto
         btnEliminar.onclick = function () {
             eliminarProducto(index);
         };
 
-        // Se agrega el botón al elemento
+        /* =========================
+           ESTRUCTURA DEL ITEM
+           ========================= */
+
+        li.appendChild(img);
+        li.appendChild(texto);
         li.appendChild(btnEliminar);
 
-        // Se agrega a la lista HTML
         lista.appendChild(li);
     });
 
-    // Se actualiza el total
+    // Actualiza el total en pantalla
     totalHTML.textContent = total;
 }
 
@@ -87,53 +119,68 @@ function actualizarCarrito() {
 
 function eliminarProducto(index) {
 
-    // Se descuenta el valor del total
-    total -= carrito[index].precio;
+    // Resta el valor del producto eliminado
+    total -= carrito[index].precio * carrito[index].cantidad;
 
-    // Se elimina el producto del array
+    // Elimina el producto del arreglo
     carrito.splice(index, 1);
 
-    // Se actualiza la interfaz
+    // Actualiza la vista del carrito
     actualizarCarrito();
 }
 
 
 /* =========================================================
-   ENVIAR PEDIDO POR WHATSAPP
+   ENVIAR COMPRA POR WHATSAPP
    ========================================================= */
 
 function enviarWhatsApp() {
 
-    // Validar carrito vacío
+    // Valida si el carrito está vacío
     if (carrito.length === 0) {
         alert("El carrito está vacío");
         return;
     }
 
-    // Pedir nombre del cliente
-    let nombreCliente = prompt("Ingresa tu nombre:");
+    /* =========================
+       DATOS DEL USUARIO
+       ========================= */
 
-    // Validar nombre
-    if (!nombreCliente) {
-        alert("Debes ingresar tu nombre");
-        return;
-    }
+    // Solicita nombre del acudiente
+    let nombreAcudiente = prompt("Ingresa tu nombre (acudiente):");
+    if (!nombreAcudiente) return;
 
-    // Construcción del mensaje
-    let mensaje = `Hola, soy ${nombreCliente}. Estoy interesado en comprar:\n\n`;
+    // Solicita nombre del niño
+    let nombreNino = prompt("Ingresa el nombre del niño:");
+    if (!nombreNino) return;
 
+
+    /* =========================
+       MENSAJE DE WHATSAPP
+       ========================= */
+
+    let mensaje = `Hola, soy ${nombreAcudiente} acudiente de ${nombreNino}.\n\n`;
+    mensaje += `Estoy interesado en comprar:\n\n`;
+
+    // Recorre los productos del carrito
     carrito.forEach(item => {
-        mensaje += `- ${item.nombre} ($${item.precio})\n`;
+
+        mensaje += `Producto: ${item.nombreProducto}\n`;
+        mensaje += `Cantidad: ${item.cantidad}\n`;
+        mensaje += `Subtotal: $${item.precio * item.cantidad}\n\n`;
     });
 
-    mensaje += `\nTotal: $${total}`;
+    // Agrega total final
+    mensaje += `Total: $${total}`;
 
-    // Número de WhatsApp (formato internacional)
+
+    /* =========================
+       ENVÍO A WHATSAPP
+       ========================= */
+
     let telefono = "573243934290";
 
-    // URL de WhatsApp
     let url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
 
-    // Abrir WhatsApp
     window.open(url, "_blank");
 }
