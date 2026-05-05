@@ -1,69 +1,91 @@
 /* =========================================================
-   SERVIDOR PRINCIPAL - ESCUELA SANTOS
-   Este archivo enciende el backend con Node.js + Express
+   SERVER.JS - ESCUELA DE FÚTBOL SANTOS
+   Backend con Node.js + Express
+   Maneja productos y pedidos del carrito
    ========================================================= */
 
-/*
-   1. Importamos las librerías necesarias
-*/
-const express = require("express"); // Framework para crear el servidor
-const cors = require("cors");       // Permite comunicación con el frontend
-require("dotenv").config();         // Carga variables del archivo .env
 
-/*
-   2. Creamos la aplicación de Express
-*/
+/* =========================
+   IMPORTACIONES
+   ========================= */
+
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+
+
+/* =========================
+   CONFIGURACIÓN DEL SERVIDOR
+   ========================= */
+
 const app = express();
+const PORT = 3000;
 
-/*
-   3. Middlewares (configuraciones del servidor)
-*/
 
-// Permite recibir datos en formato JSON desde el frontend
-app.use(express.json());
+/* =========================
+   MIDDLEWARES
+   ========================= */
 
-// Permite conexión desde cualquier frontend (HTML, JS, etc.)
+// Permite comunicación entre frontend y backend
 app.use(cors());
 
-/*
-   4. Conexión a base de datos
-   (traemos el archivo db.js que creaste en config/)
-*/
-const db = require("./config/db");
+// Permite leer JSON desde el frontend
+app.use(express.json());
+
+
+/* =========================
+   BASE DE DATOS SIMULADA (PRODUCTOS)
+   ========================= */
 
 /*
-   5. RUTA DE PRUEBA
-   Sirve para verificar que el servidor está funcionando
+   Por ahora usamos datos en memoria.
+   Más adelante lo conectamos a MySQL.
 */
-app.get("/", (req, res) => {
-  res.send("🚀 Backend Escuela Santos funcionando correctamente");
+let productos = [
+    { id: 1, nombre: "Uniforme Escuela Santos", precio: 50000 },
+    { id: 2, nombre: "Medias Deportivas", precio: 10000 },
+    { id: 3, nombre: "Balón de Entrenamiento", precio: 30000 }
+];
+
+
+/* =========================
+   RUTA: OBTENER PRODUCTOS
+   ========================= */
+
+/*
+   Envía la lista de productos al frontend
+*/
+app.get("/productos", (req, res) => {
+    res.json(productos);
 });
 
+
+/* =========================
+   RUTA: RECIBIR PEDIDOS
+   ========================= */
+
 /*
-   6. RUTA DE PRUEBA: CONSULTAR USUARIOS
-   Esto prueba la conexión con MySQL
+   Recibe el carrito desde el frontend
 */
-app.get("/usuarios", (req, res) => {
-  const sql = "SELECT * FROM usuarios";
+app.post("/pedidos", (req, res) => {
+    const pedido = req.body;
 
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.log("Error en la consulta:", err);
-      return res.status(500).send("Error en la base de datos");
-    }
+    console.log("Pedido recibido del frontend:");
+    console.log(pedido);
 
-    res.json(result);
-  });
+    // Aquí luego se guarda en MySQL
+
+    res.json({
+        mensaje: "Pedido recibido correctamente",
+        pedido: pedido
+    });
 });
 
-/*
-   7. CONFIGURACIÓN DEL PUERTO
-*/
-const PORT = process.env.PORT || 3000;
 
-/*
-   8. ENCENDER EL SERVIDOR
-*/
+/* =========================
+   SERVIDOR ACTIVO
+   ========================= */
+
 app.listen(PORT, () => {
-  console.log(`✅ Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
