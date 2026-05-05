@@ -389,3 +389,174 @@ footer {
         height: 180px;
     }
 }
+
+/* =========================================================
+   PRODUCTOS DE LA TIENDA
+   Estilos para las tarjetas de productos
+   ========================================================= */
+
+/* Contenedor general de productos */
+.productos {
+    display: grid; /* Organiza los productos en formato de rejilla */
+    grid-template-columns: 1fr; /* Una columna en móvil */
+    gap: 15px; /* Espacio entre productos */
+    padding: 15px; /* Espaciado interno */
+}
+
+/* Tarjeta individual de cada producto */
+.producto {
+    background: #f9f9f9; /* Fondo claro para destacar el producto */
+    padding: 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* Sombra suave */
+
+    transition: transform 0.2s ease; /* Animación suave al pasar el mouse */
+}
+
+/* Efecto hover sobre la tarjeta */
+.producto:hover {
+    transform: translateY(-3px); /* Eleva ligeramente la tarjeta */
+}
+
+/* Título del producto */
+.producto h3 {
+    margin-bottom: 8px; /* Separación inferior */
+}
+
+/* Precio del producto */
+.producto p {
+    margin-bottom: 10px; /* Separación inferior */
+    font-weight: bold; /* Resalta el precio */
+}
+
+
+/* =========================================================
+   BOTÓN AGREGAR AL CARRITO
+   ========================================================= */
+
+.producto button {
+
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+
+    border: 2px solid #000; /* Borde negro */
+    padding: 8px 14px; /* Tamaño del botón */
+
+    border-radius: 6px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor tipo mano */
+
+    font-weight: bold; /* Texto en negrita */
+
+    position: relative; /* Necesario para el efecto visual */
+    overflow: hidden; /* Oculta el brillo fuera del botón */
+
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover del botón */
+.producto button:hover {
+    background-color: #fff; /* Fondo blanco */
+    color: #000; /* Texto negro */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+}
+
+/* Efecto de brillo animado */
+.producto button::before {
+
+    content: ""; /* Elemento decorativo */
+    position: absolute; /* Se posiciona dentro del botón */
+
+    top: 0;
+    left: -100%; /* Empieza fuera del botón */
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+
+    transition: 0.5s; /* Animación del brillo */
+}
+
+/* Movimiento del brillo al hacer hover */
+.producto button:hover::before {
+    left: 100%;
+}
+
+
+/* =========================================================
+   CARRITO DE COMPRAS
+   ========================================================= */
+
+/* Contenedor del carrito */
+.carrito {
+    padding: 15px; /* Espaciado interno */
+}
+
+/* Lista de productos del carrito */
+#lista-carrito {
+    list-style: none; /* Elimina viñetas */
+    margin-top: 10px; /* Separación superior */
+}
+
+/* Cada producto dentro del carrito */
+#lista-carrito li {
+    background: #f9f9f9; /* Fondo claro */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 8px; /* Separación entre productos */
+
+    border-radius: 6px; /* Bordes redondeados */
+
+    display: flex; /* Alineación horizontal */
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center; /* Centrado vertical */
+}
+
+/* Botón de eliminar producto */
+#lista-carrito button {
+    background: red; /* Color rojo */
+    color: white; /* Texto blanco */
+
+    border: none; /* Sin borde */
+    padding: 4px 8px; /* Tamaño pequeño */
+
+    border-radius: 4px; /* Bordes suaves */
+    cursor: pointer; /* Mano al pasar */
+}
+
+/* Hover del botón eliminar */
+#lista-carrito button:hover {
+    background: darkred; /* Rojo más oscuro */
+}
+
+
+/* =========================================================
+   BOTÓN FINALIZAR COMPRA
+   ========================================================= */
+
+.carrito button {
+
+    margin-top: 10px; /* Separación superior */
+
+    background-color: #25D366; /* Color WhatsApp */
+    color: white; /* Texto blanco */
+
+    border: none; /* Sin borde */
+    padding: 10px 14px; /* Tamaño del botón */
+
+    border-radius: 6px; /* Bordes redondeados */
+
+    font-weight: bold; /* Texto resaltado */
+    cursor: pointer; /* Mano al pasar */
+
+    transition: transform 0.2s ease; /* Animación suave */
+}
+
+/* Efecto hover del botón final */
+.carrito button:hover {
+    transform: scale(1.05); /* Aumenta ligeramente */
+}
